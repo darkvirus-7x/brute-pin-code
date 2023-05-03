@@ -1,1 +1,4 @@
 pure-python-adb
+time
+os
+sys
