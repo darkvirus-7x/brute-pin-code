@@ -14,20 +14,32 @@ def connect(l):
     device = devices[0]
     print(f'Connected to {device}')
     x = 0
+    z = 0
+    v = 0
     for i in l:
-        if x <= 5:
-            x += 1
+        if x < 5:
             device.shell('input text {}'.format(i))
-        elif x == 6:
-            print('wating 30 seconds!...')
+            x += 1
+        elif x == 5:
+            print('waiting 30 seconds!...')
             sleep(30)
             x += 1
-        elif x == 7 or x <= 10:
+        elif x == 6 or x <= 9:
+            z += 1
+            if z == 1: 
+                device.shell('input keyevent 26')
+                device.shell('input touchscreen swipe 930 880 930 380')
             device.shell('input text {}'.format(i))
+            x += 1
+        elif x == 10:
+            print('waiting 30 seconds')
+            sleep(30)
             x += 1
         elif x >= 11:
-            x += 1
+            device.shell('input keyevent 26')
+            device.shell('input touchscreen swipe 930 880 930 380')
             device.shell('input text {}'.format(i))
+            x += 1
             sleep(30)
 if os.path.exists(file) == True:
     f = open(file,'r+')
